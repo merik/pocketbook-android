@@ -2,15 +2,6 @@
 
 Just a challenge
 
-## Getting Started
-
-If any error occurs, may need to run
-
-```
-pod install
-```
-then reopen the workspace
-
 ## iOS version
 
 iOS version is here (https://github.com/merik/pocketbook-ios)
