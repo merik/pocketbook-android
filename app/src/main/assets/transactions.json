@@ -1,0 +1,216 @@
+
+	[
+		{
+			"id" : 1,
+			"date": "15-01-2018 10:20:30",
+			"name": "Cashless Westpac",
+			"amount": 700.00,
+			"sub_category": "ATM Withdrawals",
+			"main_category": "Cash Withdrawals",
+			"photo" : [],
+			"payment_type": "Westpac gold card"
+
+		},
+		{
+		    "id" : 2,
+			"date": "10-01-2018 10:20:30",
+			"name": "Cashless NAT",
+			"amount": 600.00,
+			"sub_category": "ATM Withdrawals",
+			"main_category": "Cash Withdrawals",
+			"photo" : [],
+			"payment_type": "NAT silver card"
+		},
+		{
+			"id" : 3,
+			"date": "15-01-2018 12:30:30",
+			"name": "Online Tfr Westpac Choice",
+			"amount": 350.00,
+			"sub_category": "ATM Withdrawals",
+			"main_category": "Online Expenses",
+			"photo" : [],
+			"payment_type": "Westpac gold card"
+		},
+        {
+            "id" : 4,
+            "date": "11-01-2018 9:20:30",
+            "name": "Online Tfr Westpac Choice",
+            "amount": 700.00,
+            "sub_category": "ATM Withdrawals",
+            "main_category": "Invoices",
+            "photo" : [],
+            "payment_type": "Westpac silver card"
+                     
+        },
+        {
+            "id" : 5,
+            "date": "10-01-2018 8:20:30",
+            "name": "Amazon AU",
+            "amount": 600.00,
+            "sub_category": "Online Purchases",
+            "main_category": "Online Payments",
+            "photo" : [],
+            "payment_type": "NAT gold card"
+        },
+        {
+            "id" : 6,
+            "date": "10-01-2018 12:30:30",
+            "name": "Online Tfr Westpac Choice",
+            "amount": 1200.00,
+            "sub_category": "ATM Withdrawals",
+            "main_category": "Opal Payment",
+            "photo" : [],
+            "payment_type": "Savings account"
+        },
+        {
+            "id" : 7,
+            "date": "15-01-2018 12:30:30",
+            "name": "Westfield Liv",
+            "amount": 1300.50,
+            "sub_category": "",
+            "main_category": "",
+            "photo" : [],
+            "payment_type": "Westpac silver card"
+        },
+        {
+            "id" : 8,
+            "date": "11-01-2018 16:30:30",
+            "name": "eBay AU",
+            "amount": 4300.50,
+            "sub_category": "eBay",
+            "main_category": "Online Purchases",
+            "photo" : [],
+            "payment_type": "Westpac gold card"
+        },
+        {
+            "id" : 9,
+            "date": "15-01-2018 6:30:30",
+            "name": "Online Tfr Westpac Choice",
+            "amount": 300.50,
+            "sub_category": "ATM Withdrawals",
+            "main_category": "Cash Withdrawals",
+            "photo" : [],
+            "payment_type": "Westpac gold card"
+        },
+        {
+            "id" : 10,
+            "date": "11-01-2018 2:30:30",
+            "name": "Online Tfr Westpac Choice",
+            "amount": 1.50,
+            "sub_category": "ATM Withdrawals",
+            "main_category": "Cash Withdrawals",
+            "photo" : [],
+            "payment_type": "Westpac gold card"
+        },
+        {
+            "id" : 11,
+            "date": "11-01-2018 12:30:30",
+            "name": "Online Tfr Westpac Choice",
+            "amount": 2.70,
+            "sub_category": "ATM Withdrawals",
+            "main_category": "Cash Withdrawals",
+            "photo" : [],
+            "payment_type": "Westpac gold card"
+        },
+        {
+            "id" : 3,
+            "date": "11-01-2018 12:30:30",
+            "name": "Online Tfr Westpac Choice",
+            "amount": 3.50,
+            "sub_category": "ATM Withdrawals",
+            "main_category": "Cash Withdrawals",
+            "photo" : [],
+            "payment_type": "Westpac gold card"
+        },
+        {
+            "id" : 12,
+            "date": "10-01-2018 12:30:30",
+            "name": "Online Tfr Westpac Choice",
+            "amount": 10.50,
+            "sub_category": "ATM Withdrawals",
+            "main_category": "",
+            "photo" : [],
+            "payment_type": "Westpac gold card"
+        },
+        {
+            "id" : 13,
+            "date": "15-01-2018 12:30:30",
+            "name": "Online Tfr Westpac Choice",
+            "amount": 90.00,
+            "sub_category": "ATM Withdrawals",
+            "main_category": "Cash Withdrawals",
+            "photo" : [],
+            "payment_type": "Westpac gold card"
+        },
+        {
+            "id" : 14,
+            "date": "11-01-2018 12:30:30",
+            "name": "Online Tfr Westpac Choice",
+            "amount": 80.00,
+            "sub_category": "ATM Withdrawals",
+            "main_category": "Cash Withdrawals",
+            "photo" : [],
+            "payment_type": "Westpac gold card"
+        },
+        {
+            "id" : 15,
+            "date": "15-01-2018 12:30:30",
+            "name": "Online Tfr Westpac Choice",
+            "amount": 70.50,
+            "sub_category": "ATM Withdrawals",
+            "main_category": "Cash Withdrawals",
+            "photo" : [],
+            "payment_type": "Westpac gold card"
+        },
+        {
+            "id" : 16,
+            "date": "12-01-2018 12:30:30",
+            "name": "Online Tfr Westpac Choice",
+            "amount": 10.95,
+            "sub_category": "ATM Withdrawals",
+            "main_category": "Cash Withdrawals",
+            "photo" : [],
+            "payment_type": "Westpac gold card"
+        },
+        {
+            "id" : 17,
+            "date": "11-01-2018 12:30:30",
+            "name": "Online Tfr Westpac Choice",
+            "amount": 20.50,
+            "sub_category": "ATM Withdrawals",
+            "main_category": "Cash Withdrawals",
+            "photo" : [],
+            "payment_type": "Westpac gold card"
+        },
+        {
+            "id" : 18,
+            "date": "15-01-2018 12:30:30",
+            "name": "Online Tfr Westpac Choice",
+            "amount": 100.00,
+            "sub_category": "ATM Withdrawals",
+            "main_category": "Cash Withdrawals",
+            "photo" : [],
+            "payment_type": "Westpac gold card"
+        },
+        {
+            "id" : 19,
+            "date": "13-01-2018 12:30:30",
+            "name": "Online Tfr Westpac Choice",
+            "amount": 3000.00,
+            "sub_category": "ATM Withdrawals",
+            "main_category": "Cash Withdrawals",
+            "photo" : [],
+            "payment_type": "Westpac gold card"
+        },
+        {
+            "id" : 20,
+            "date": "15-01-2018 12:30:30",
+            "name": "Online Tfr Westpac Choice",
+            "amount": 30.50,
+            "sub_category": "ATM Withdrawals",
+            "main_category": "Cash Withdrawals",
+            "photo" : [],
+            "payment_type": "Westpac gold card"
+        }
+  ]
+
