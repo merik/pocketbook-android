@@ -9,26 +9,22 @@ import android.widget.Button;
 
 import com.dmc.pocketbook.pbservice.PBService;
 
+import butterknife.ButterKnife;
+import butterknife.OnClick;
+
 public class SignInActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sign_in);
-
-        Button btnSignIn = findViewById(R.id.button_sign_in);
-        btnSignIn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                onSignIn();
-            }
-        });
+        ButterKnife.bind(this);
         PBService.getInstance().initContext(this.getApplicationContext());
     }
 
 
-
-    private void onSignIn() {
+    @OnClick(R.id.button_sign_in)
+    public void onSignIn() {
         Intent intent = new Intent(this, RecentTransactionActivity.class);
         startActivity(intent);
     }

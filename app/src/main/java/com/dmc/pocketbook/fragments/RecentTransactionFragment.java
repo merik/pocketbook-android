@@ -28,26 +28,28 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
+import butterknife.OnClick;
+import butterknife.Unbinder;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.functions.Consumer;
 import io.reactivex.schedulers.Schedulers;
 
-/**
- * A simple {@link Fragment} subclass.
- * Activities that contain this fragment must implement the
- * {@link RecentTransactionFragment.OnFragmentInteractionListener} interface
- * to handle interaction events.
- * Use the {@link RecentTransactionFragment#newInstance} factory method to
- * create an instance of this fragment.
- */
-public class RecentTransactionFragment extends Fragment implements TransactionAdapter.OnTransactionClickListener {
-    RecyclerView recyclerView;
-    TransactionAdapter adapter;
 
+public class RecentTransactionFragment extends Fragment implements TransactionAdapter.OnTransactionClickListener {
+    @BindView(R.id.table_transactions)
+    RecyclerView recyclerView;
+
+    @BindView(R.id.navigation)
+    BottomNavigationView navigation;
+
+    TransactionAdapter adapter;
     List<SectionHeader> sections;
 
 
     private OnRecentTransactionFragmentListener mListener;
+    private Unbinder unbinder;
 
     Context mContext;
 
@@ -77,20 +79,22 @@ public class RecentTransactionFragment extends Fragment implements TransactionAd
         mContext = getActivity();
 
         View rootView = inflater.inflate(R.layout.fragment_recent_transactions, container, false);
-        BottomNavigationView navigation = rootView.findViewById(R.id.navigation);
+        unbinder = ButterKnife.bind(this, rootView);
+
+        //BottomNavigationView navigation = rootView.findViewById(R.id.navigation);
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
 
         BottomNavigationViewHelper.disableShiftMode(navigation);
 
-        ImageView imgBack = rootView.findViewById(R.id.image_back);
-        imgBack.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                onBackPressed();
-            }
-        });
+        //ImageView imgBack = rootView.findViewById(R.id.image_back);
+//        imgBack.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                onBackPressed();
+//            }
+//        });
 
-        recyclerView = rootView.findViewById(R.id.table_transactions);
+       // recyclerView = rootView.findViewById(R.id.table_transactions);
 
 
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(mContext);
@@ -185,7 +189,9 @@ public class RecentTransactionFragment extends Fragment implements TransactionAd
             return false;
         }
     };
-    private void onBackPressed() {
+
+    @OnClick(R.id.image_back)
+    public void onBackPressed() {
         if (mListener != null) {
             mListener.onRecentTransactionBackPressed();
         }

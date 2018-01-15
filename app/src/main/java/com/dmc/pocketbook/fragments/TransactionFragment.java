@@ -15,19 +15,33 @@ import android.widget.TextView;
 import com.dmc.pocketbook.R;
 import com.dmc.pocketbook.models.Transaction;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
+import butterknife.OnClick;
+import butterknife.Unbinder;
+
 
 public class TransactionFragment extends DialogFragment {
 
 
     private Transaction transaction;
-
+    @BindView(R.id.text_amount)
     TextView txtAmount;
+
+    @BindView(R.id.text_main_category)
     TextView txtMainCategory;
+
+    @BindView(R.id.text_subcategory)
     TextView txtSubCategory;
+
+    @BindView(R.id.text_day)
     TextView txtDay;
+
+    @BindView(R.id.text_payment)
     TextView txtPayment;
 
 
+    private Unbinder unbinder;
     private OnTransactionFragmentListener mListener;
 
     public TransactionFragment() {
@@ -56,29 +70,22 @@ public class TransactionFragment extends DialogFragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View rootView = inflater.inflate(R.layout.fragment_transaction, container, false);
-
-        txtSubCategory = rootView.findViewById(R.id.text_subcategory);
-        txtMainCategory = rootView.findViewById(R.id.text_main_category);
-        txtDay = rootView.findViewById(R.id.text_day);
-        txtPayment = rootView.findViewById(R.id.text_payment);
-        txtAmount = rootView.findViewById(R.id.text_amount);
-
+        unbinder = ButterKnife.bind(this, rootView);
 
         txtSubCategory.setBackground(roundedCornerBG(30));      // FIXME
         txtMainCategory.setBackground(roundedCornerBG(30));
-
-        TextView txtX = rootView.findViewById(R.id.text_x);
-        txtX.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                onClosedButtonPressed();
-            }
-        });
 
         showTransaction();
 
         return rootView;
     }
+
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+        unbinder.unbind();
+    }
+
     public void setTransaction(Transaction transaction) {
         this.transaction = transaction;
     }
@@ -106,9 +113,9 @@ public class TransactionFragment extends DialogFragment {
         return gd;
     }
 
-
+    @OnClick(R.id.text_x)
     public void onClosedButtonPressed() {
-        //getActivity().getFragmentManager().popBackStack();
+
         if (mListener != null) {
             mListener.onTransactionFragmentClosePressed();
         }
@@ -133,7 +140,7 @@ public class TransactionFragment extends DialogFragment {
 
 
     public interface OnTransactionFragmentListener {
-        // TODO: Update argument type and name
+
         void onTransactionFragmentClosePressed();
     }
 }

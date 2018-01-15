@@ -2,23 +2,14 @@ package com.dmc.pocketbook;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.RecyclerView;
 
 import com.dmc.pocketbook.fragments.RecentTransactionFragment;
 import com.dmc.pocketbook.fragments.TransactionFragment;
 import com.dmc.pocketbook.models.Transaction;
-import com.dmc.pocketbook.transactionrecyclerview.SectionHeader;
-import com.dmc.pocketbook.transactionrecyclerview.TransactionAdapter;
 
-import java.util.List;
 
 public class RecentTransactionActivity extends AppCompatActivity implements RecentTransactionFragment.OnRecentTransactionFragmentListener, TransactionFragment.OnTransactionFragmentListener {
 
-
-    RecyclerView recyclerView;
-    TransactionAdapter adapter;
-
-    List<SectionHeader> sections;
     RecentTransactionFragment recentTransactionFragment;
     TransactionFragment transactionFragment;
 
@@ -34,9 +25,6 @@ public class RecentTransactionActivity extends AppCompatActivity implements Rece
 
 
     }
-
-
-
 
     public void showTransactionDetails(Transaction transaction) {
         transactionFragment.setTransaction(transaction);
