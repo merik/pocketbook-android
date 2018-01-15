@@ -20,8 +20,6 @@
         <activity
             android:name=".RecentTransactionActivity"
             android:label="@string/title_activity_recent_transaction" />
-        <activity android:name=".TransactionActivity"
-            android:theme="@style/Theme.AppCompat.Dialog"></activity>
     </application>
 
 </manifest>
