@@ -1,5 +1,6 @@
 package com.dmc.pocketbook.fragments;
 
+import android.arch.lifecycle.ViewModelProviders;
 import android.content.Context;
 import android.graphics.Color;
 import android.graphics.drawable.GradientDrawable;
@@ -14,6 +15,7 @@ import android.widget.TextView;
 
 import com.dmc.pocketbook.R;
 import com.dmc.pocketbook.models.Transaction;
+import com.dmc.pocketbook.viewmodels.TransactionViewModel;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -24,7 +26,7 @@ import butterknife.Unbinder;
 public class TransactionFragment extends DialogFragment {
 
 
-    private Transaction transaction;
+    //private Transaction transaction;
     @BindView(R.id.text_amount)
     TextView txtAmount;
 
@@ -60,9 +62,16 @@ public class TransactionFragment extends DialogFragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-            transaction = getArguments().getParcelable("transaction");
-        }
+
+        TransactionViewModel transactionViewModel = ViewModelProviders.of(this).get(TransactionViewModel.class);
+        transactionViewModel.getSelected().observe(this, transaction1 -> {
+            showTransaction(transaction1);
+        });
+
+
+//        if (getArguments() != null) {
+//            transaction = getArguments().getParcelable("transaction");
+//        }
     }
 
     @Override
@@ -75,7 +84,7 @@ public class TransactionFragment extends DialogFragment {
         txtSubCategory.setBackground(roundedCornerBG(30));      // FIXME
         txtMainCategory.setBackground(roundedCornerBG(30));
 
-        showTransaction();
+        //showTransaction();
 
         return rootView;
     }
@@ -86,10 +95,10 @@ public class TransactionFragment extends DialogFragment {
         unbinder.unbind();
     }
 
-    public void setTransaction(Transaction transaction) {
-        this.transaction = transaction;
-    }
-    private void showTransaction() {
+//    public void setTransaction(Transaction transaction) {
+//        this.transaction = transaction;
+//    }
+    private void showTransaction(Transaction transaction) {
         if (transaction != null) {
             txtPayment.setText(transaction.payment_type);
             if (transaction.hasCategory()) {

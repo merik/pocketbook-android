@@ -1,14 +1,18 @@
 package com.dmc.pocketbook;
 
+import android.arch.lifecycle.ViewModelProviders;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 
 import com.dmc.pocketbook.fragments.RecentTransactionFragment;
 import com.dmc.pocketbook.fragments.TransactionFragment;
 import com.dmc.pocketbook.models.Transaction;
+import com.dmc.pocketbook.viewmodels.TransactionViewModel;
 
 
 public class RecentTransactionActivity extends AppCompatActivity implements RecentTransactionFragment.OnRecentTransactionFragmentListener, TransactionFragment.OnTransactionFragmentListener {
+
+    TransactionViewModel selectedTransaction;
 
     RecentTransactionFragment recentTransactionFragment;
     TransactionFragment transactionFragment;
@@ -18,6 +22,7 @@ public class RecentTransactionActivity extends AppCompatActivity implements Rece
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_recent_transaction);
         recentTransactionFragment = RecentTransactionFragment.newInstance();
+        selectedTransaction = ViewModelProviders.of(this).get(TransactionViewModel.class);
         transactionFragment = new TransactionFragment();
         if (savedInstanceState == null) {
             getSupportFragmentManager().beginTransaction().add(R.id.fragment_placeholder, recentTransactionFragment).commit();
@@ -27,7 +32,7 @@ public class RecentTransactionActivity extends AppCompatActivity implements Rece
     }
 
     public void showTransactionDetails(Transaction transaction) {
-        transactionFragment.setTransaction(transaction);
+        selectedTransaction.select(transaction);
         getSupportFragmentManager().beginTransaction().add(R.id.fragment_placeholder, transactionFragment).commit();
 
     }

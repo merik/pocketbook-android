@@ -1,5 +1,6 @@
 package com.dmc.pocketbook.fragments;
 
+import android.arch.lifecycle.ViewModelProviders;
 import android.content.Context;
 
 import android.os.Bundle;
@@ -12,17 +13,17 @@ import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
-import android.widget.Toast;
 
 import com.dmc.pocketbook.R;
 
 import com.dmc.pocketbook.helpers.BottomNavigationViewHelper;
 import com.dmc.pocketbook.models.Transaction;
-import com.dmc.pocketbook.pbservice.PBService;
+import com.dmc.pocketbook.models.TransactionRepository;
 import com.dmc.pocketbook.transactionrecyclerview.SectionHeader;
 import com.dmc.pocketbook.transactionrecyclerview.SimpleDividerItemDecoration;
 import com.dmc.pocketbook.transactionrecyclerview.TransactionAdapter;
+import com.dmc.pocketbook.viewmodels.RecentTransactionViewModel;
+import com.dmc.pocketbook.viewmodels.RecentTransactionViewModelFactory;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -32,9 +33,6 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import butterknife.Unbinder;
-import io.reactivex.android.schedulers.AndroidSchedulers;
-import io.reactivex.functions.Consumer;
-import io.reactivex.schedulers.Schedulers;
 
 
 public class RecentTransactionFragment extends Fragment implements TransactionAdapter.OnTransactionClickListener {
@@ -50,6 +48,9 @@ public class RecentTransactionFragment extends Fragment implements TransactionAd
 
     private OnRecentTransactionFragmentListener mListener;
     private Unbinder unbinder;
+    private RecentTransactionViewModel transactionViewModel;
+    private RecentTransactionViewModelFactory transactionViewModelFactory;
+
 
     Context mContext;
 
@@ -81,20 +82,9 @@ public class RecentTransactionFragment extends Fragment implements TransactionAd
         View rootView = inflater.inflate(R.layout.fragment_recent_transactions, container, false);
         unbinder = ButterKnife.bind(this, rootView);
 
-        //BottomNavigationView navigation = rootView.findViewById(R.id.navigation);
+
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
-
         BottomNavigationViewHelper.disableShiftMode(navigation);
-
-        //ImageView imgBack = rootView.findViewById(R.id.image_back);
-//        imgBack.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                onBackPressed();
-//            }
-//        });
-
-       // recyclerView = rootView.findViewById(R.id.table_transactions);
 
 
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(mContext);
@@ -107,33 +97,18 @@ public class RecentTransactionFragment extends Fragment implements TransactionAd
         adapter = new TransactionAdapter(mContext, sections, this);
         recyclerView.setAdapter(adapter);
 
+        transactionViewModelFactory = new RecentTransactionViewModelFactory(new TransactionRepository());
 
-        fetchTransactions();
+        transactionViewModel = ViewModelProviders.of(this, transactionViewModelFactory).get(RecentTransactionViewModel.class);
+        transactionViewModel.transactions().observe(this, transactions -> handleTransactions(transactions));
+
+        transactionViewModel.loadTransactions();
+
 
         return rootView;
     }
 
-    private void fetchTransactions() {
 
-        PBService.getInstance().fetchTransactions("1")
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new Consumer<List<Transaction>>() {
-                               @Override
-                               public void accept(List<Transaction> transactions) throws Exception {
-                                   handleTransactions(transactions);
-                               }
-
-                           },
-                        new Consumer<Throwable>() {
-                            @Override
-                            public void accept(Throwable throwable) throws Exception {
-                                Toast.makeText(mContext, throwable.getMessage(), Toast.LENGTH_LONG).show();
-                            }
-                        });
-
-
-    }
     private void handleTransactions(List<Transaction> transactions) {
         Collections.sort(transactions);
         // create sections
@@ -216,16 +191,7 @@ public class RecentTransactionFragment extends Fragment implements TransactionAd
         mListener = null;
     }
 
-    /**
-     * This interface must be implemented by activities that contain this
-     * fragment to allow an interaction in this fragment to be communicated
-     * to the activity and potentially other fragments contained in that
-     * activity.
-     * <p>
-     * See the Android Training lesson <a href=
-     * "http://developer.android.com/training/basics/fragments/communicating.html"
-     * >Communicating with Other Fragments</a> for more information.
-     */
+    
     public interface OnRecentTransactionFragmentListener {
         void onRecentTransactionBackPressed();
         void onTransactionClicked(Transaction transaction);

@@ -20,6 +20,11 @@ android {
     lintOptions {
         disable 'RestrictedApi'
     }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+
 }
 
 dependencies {
@@ -42,6 +47,11 @@ dependencies {
     compile 'com.squareup.retrofit2:adapter-rxjava2:2.3.0'
     compile 'com.github.IntruderShanky:Sectioned-RecyclerView:2.1.1'
 
+    //ButterKnife
     compile 'com.jakewharton:butterknife:8.5.1'
     annotationProcessor 'com.jakewharton:butterknife-compiler:8.5.1'
+
+    // ViewModel and LiveData
+    implementation "android.arch.lifecycle:extensions:1.0.0"
+    annotationProcessor "android.arch.lifecycle:compiler:1.0.0"
 }
