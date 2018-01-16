@@ -18,16 +18,17 @@ import com.dmc.pocketbook.R;
 
 import com.dmc.pocketbook.helpers.BottomNavigationViewHelper;
 import com.dmc.pocketbook.models.Transaction;
-import com.dmc.pocketbook.models.TransactionRepository;
+
 import com.dmc.pocketbook.transactionrecyclerview.SectionHeader;
 import com.dmc.pocketbook.transactionrecyclerview.SimpleDividerItemDecoration;
 import com.dmc.pocketbook.transactionrecyclerview.TransactionAdapter;
 import com.dmc.pocketbook.viewmodels.RecentTransactionViewModel;
-import com.dmc.pocketbook.viewmodels.RecentTransactionViewModelFactory;
 
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+
+import javax.inject.Inject;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -35,7 +36,10 @@ import butterknife.OnClick;
 import butterknife.Unbinder;
 
 
+
 public class RecentTransactionFragment extends Fragment implements TransactionAdapter.OnTransactionClickListener {
+
+
     @BindView(R.id.table_transactions)
     RecyclerView recyclerView;
 
@@ -49,7 +53,6 @@ public class RecentTransactionFragment extends Fragment implements TransactionAd
     private OnRecentTransactionFragmentListener mListener;
     private Unbinder unbinder;
     private RecentTransactionViewModel transactionViewModel;
-    private RecentTransactionViewModelFactory transactionViewModelFactory;
 
 
     Context mContext;
@@ -62,7 +65,6 @@ public class RecentTransactionFragment extends Fragment implements TransactionAd
 
     public static RecentTransactionFragment newInstance() {
         RecentTransactionFragment fragment = new RecentTransactionFragment();
-
         return fragment;
     }
 
@@ -76,6 +78,8 @@ public class RecentTransactionFragment extends Fragment implements TransactionAd
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
+
+
 
         mContext = getActivity();
 
@@ -97,12 +101,11 @@ public class RecentTransactionFragment extends Fragment implements TransactionAd
         adapter = new TransactionAdapter(mContext, sections, this);
         recyclerView.setAdapter(adapter);
 
-        transactionViewModelFactory = new RecentTransactionViewModelFactory(new TransactionRepository());
 
-        transactionViewModel = ViewModelProviders.of(this, transactionViewModelFactory).get(RecentTransactionViewModel.class);
+        transactionViewModel = ViewModelProviders.of(this).get(RecentTransactionViewModel.class);
         transactionViewModel.transactions().observe(this, transactions -> handleTransactions(transactions));
 
-        transactionViewModel.loadTransactions();
+        transactionViewModel.loadTransactions("1");
 
 
         return rootView;
@@ -191,7 +194,7 @@ public class RecentTransactionFragment extends Fragment implements TransactionAd
         mListener = null;
     }
 
-    
+
     public interface OnRecentTransactionFragmentListener {
         void onRecentTransactionBackPressed();
         void onTransactionClicked(Transaction transaction);

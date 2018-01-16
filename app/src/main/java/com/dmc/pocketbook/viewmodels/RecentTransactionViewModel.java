@@ -4,11 +4,14 @@ import android.arch.lifecycle.MutableLiveData;
 import android.arch.lifecycle.ViewModel;
 import android.widget.Toast;
 
+import com.dmc.pocketbook.PocketBookApp;
+import com.dmc.pocketbook.data.AppRepository;
 import com.dmc.pocketbook.models.Transaction;
-import com.dmc.pocketbook.models.TransactionRepository;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import javax.inject.Inject;
 
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.CompositeDisposable;
@@ -22,10 +25,12 @@ import io.reactivex.schedulers.Schedulers;
 public class RecentTransactionViewModel extends ViewModel {
     private final CompositeDisposable disposables = new CompositeDisposable();
     private final MutableLiveData<List<Transaction>> transactions = new MutableLiveData<>();
-    private final TransactionRepository transactionRepository;
 
-    RecentTransactionViewModel(TransactionRepository transactionRepository) {
-        this.transactionRepository = transactionRepository;
+    @Inject
+    AppRepository appRepository;
+
+    public RecentTransactionViewModel() {
+        PocketBookApp.getAppComponent().inject(this);
     }
 
     @Override
@@ -37,8 +42,8 @@ public class RecentTransactionViewModel extends ViewModel {
         return transactions;
     }
 
-    public void loadTransactions() {
-        disposables.add(transactionRepository.fetchTransactions()
+    public void loadTransactions(String userId) {
+        disposables.add(appRepository.fetchTransactions(userId)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Consumer<List<Transaction>>() {

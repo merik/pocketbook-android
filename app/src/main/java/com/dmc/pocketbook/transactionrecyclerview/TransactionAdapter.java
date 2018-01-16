@@ -20,7 +20,7 @@ import java.util.List;
 
 
 
-import com.afollestad.sectionedrecyclerview.SectionedRecyclerViewAdapter;
+
 import com.dmc.pocketbook.R;
 import com.dmc.pocketbook.models.Transaction;
 import com.intrusoft.sectionedrecyclerview.SectionRecyclerViewAdapter;

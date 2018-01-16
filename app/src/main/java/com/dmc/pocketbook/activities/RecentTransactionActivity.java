@@ -1,9 +1,10 @@
-package com.dmc.pocketbook;
+package com.dmc.pocketbook.activities;
 
 import android.arch.lifecycle.ViewModelProviders;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 
+import com.dmc.pocketbook.R;
 import com.dmc.pocketbook.fragments.RecentTransactionFragment;
 import com.dmc.pocketbook.fragments.TransactionFragment;
 import com.dmc.pocketbook.models.Transaction;

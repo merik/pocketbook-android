@@ -17,13 +17,7 @@ import retrofit2.http.Path;
 
 public interface PBAPI {
 
-
-
     @GET("/transactions/{userId}")
     Observable<List<Transaction>> fetchTransactions(@Path("userId") String userId);
-
-
-
-
 
 }
